@@ -64,6 +64,8 @@ class VisToggler:
         # Declare instance attributes
         self.actions = []
         self.menu = self.tr(u'&Layer Visibility Toggler')
+        self.toolbar = self.iface.addToolBar(u'Layer Visibility Toggler')
+        self.toolbar.setObjectName(u'Layer Visibility Toggler')
 
         # Check if plugin was started the first time in current QGIS session
         # Must be set in initGui() to survive plugin reloads
@@ -148,7 +150,8 @@ class VisToggler:
 
         if add_to_toolbar:
             # Adds plugin icon to Plugins toolbar
-            self.iface.addToolBarIcon(action)
+            # self.iface.addToolBarIcon(action)
+            self.toolbar.addAction(action)  #this way should add to its own toolbar
 
         if add_to_menu:
             self.iface.addPluginToMenu(
