@@ -184,6 +184,33 @@ class VisToggler:
                 action)
             self.iface.removeToolBarIcon(action)
 
+    # Try to write function that alternates state of layer vis
+    def toggle_layer(self, layer):
+
+        vis = QgsProject.instance() \
+            .layerTreeRoot() \
+            .findLayer(layer.id()) \
+            .isVisible()
+        if vis == True:
+            QgsProject.instance() \
+                .layerTreeRoot() \
+                .findLayer(layer.id()) \
+                .setItemVisibilityChecked(False)
+        if vis == False:
+            QgsProject.instance() \
+                .layerTreeRoot() \
+                .findLayer(layer.id()) \
+                .setItemVisibilityChecked(True)
+
+    # Shortcut Key Section
+    def setup_shortcut(self, keysequence, layer):
+        shortcut = QShortcut(
+            QKeySequence(keysequence),
+            iface.mainWindow()
+        )
+        shortcut.setContext(Qt.ApplicationShortcut)
+        shortcut.activated.connect(lambda: self.toggle_layer(layer))
+
 
     def run(self):
         """Run method that performs all the real work"""
@@ -204,43 +231,18 @@ class VisToggler:
             # substitute with your code.
 
             # get layer from first combobox in dialog
-            layer1 = self.dlg.mMapLayerComboBox_1.currentLayer()
-            layer2 = self.dlg.mMapLayerComboBox_2.currentLayer()
-            layer3 = self.dlg.mMapLayerComboBox_3.currentLayer()
+            self.layer1 = self.dlg.mMapLayerComboBox_1.currentLayer()
+            self.layer2 = self.dlg.mMapLayerComboBox_2.currentLayer()
+            self.layer3 = self.dlg.mMapLayerComboBox_3.currentLayer()
 
             # define key shortcuts
-            keysequence1 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_1
-            keysequence2 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_2
-            keysequence3 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_3
+            self.keysequence1 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_1
+            self.keysequence2 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_2
+            self.keysequence3 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_3
 
-            # Try to write function that alternates state of layer vis
-            def toggle_layer(layer):
+            self.setup_shortcut(self.keysequence1, self.layer1)
+            self.setup_shortcut(self.keysequence2, self.layer2)
+            self.setup_shortcut(self.keysequence3, self.layer3)
+            iface.messageBar().pushMessage('shortcuts assigned', level=Qgis.Info)
 
-                vis = QgsProject.instance() \
-                    .layerTreeRoot() \
-                    .findLayer(layer.id()) \
-                    .isVisible()
-                if vis == True:
-                    QgsProject.instance() \
-                        .layerTreeRoot() \
-                        .findLayer(layer.id()) \
-                        .setItemVisibilityChecked(False)
-                if vis == False:
-                    QgsProject.instance() \
-                        .layerTreeRoot() \
-                        .findLayer(layer.id()) \
-                        .setItemVisibilityChecked(True)
-
-            # Shortcut Key Section
-            def setup_shortcut(keysequence, layer):
-                shortcut = QShortcut(
-                    QKeySequence(keysequence),
-                    iface.mainWindow()
-                )
-                shortcut.setContext(Qt.ApplicationShortcut)
-                shortcut.activated.connect(lambda: toggle_layer(layer))
-
-            setup_shortcut(keysequence1, layer1)
-            setup_shortcut(keysequence2, layer2)
-            setup_shortcut(keysequence3, layer3)
 
