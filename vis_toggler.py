@@ -201,7 +201,7 @@ class VisToggler:
             # substitute with your code.
 
             # get layer from first combobox in dialog
-            layer1 = self.dlg.mMapLayerComboBox.currentLayer()
+            layer1 = self.dlg.mMapLayerComboBox_1.currentLayer()
             layer2 = self.dlg.mMapLayerComboBox_2.currentLayer()
             layer3 = self.dlg.mMapLayerComboBox_3.currentLayer()
 
