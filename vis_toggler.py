@@ -67,6 +67,14 @@ class VisToggler:
         self.toolbar = self.iface.addToolBar(u'Layer Visibility Toggler')
         self.toolbar.setObjectName(u'Layer Visibility Toggler')
 
+        # initialise these variables
+        self.layer1 = None
+        self.layer2 = None
+        self.layer3 = None
+        self.keysequence1 = None
+        self.keysequence2 = None
+        self.keysequence3 = None
+
         # Check if plugin was started the first time in current QGIS session
         # Must be set in initGui() to survive plugin reloads
         self.first_start = None
