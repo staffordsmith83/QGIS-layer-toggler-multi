@@ -211,14 +211,19 @@ class VisToggler:
                 .setItemVisibilityChecked(True)
 
     # Shortcut Key Section
-    def setup_shortcut(self, keysequence, layer):
+    def setup_shortcut(self, keysequence):
         shortcut = QShortcut(
             QKeySequence(keysequence),
             iface.mainWindow()
         )
         shortcut.setContext(Qt.ApplicationShortcut)
+        return shortcut
+
+    def activate_shortcut(self, shortcut, layer):
         shortcut.activated.connect(lambda: self.toggle_layer(layer))
 
+    def disable_shortcut(self, shortcut):
+        shortcut.setEnabled(False)
 
     def run(self):
         """Run method that performs all the real work"""
@@ -229,9 +234,27 @@ class VisToggler:
             self.first_start = False
             self.dlg = VisTogglerDialog()
 
+            # setup shortcuts once
+            # define key shortcuts
+            self.keysequence1 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_1
+            self.keysequence2 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_2
+            self.keysequence3 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_3
+
+            self.shortcut1 = self.setup_shortcut(self.keysequence1)
+            self.shortcut2 = self.setup_shortcut(self.keysequence2)
+            self.shortcut3 = self.setup_shortcut(self.keysequence3)
+            iface.messageBar().pushMessage('shortcuts assigned', level=Qgis.Info)
+
+
         # show the dialog
         self.dlg.show()
         # Run the dialog event loop
+
+        # # Disable all shortcuts
+        # self.disable_shortcut(self.shortcut1)
+        # self.disable_shortcut(self.shortcut1)
+        # self.disable_shortcut(self.shortcut1)
+
         result = self.dlg.exec_()
         # See if OK was pressed
         if result:
@@ -243,14 +266,7 @@ class VisToggler:
             self.layer2 = self.dlg.mMapLayerComboBox_2.currentLayer()
             self.layer3 = self.dlg.mMapLayerComboBox_3.currentLayer()
 
-            # define key shortcuts
-            self.keysequence1 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_1
-            self.keysequence2 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_2
-            self.keysequence3 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_3
-
-            self.setup_shortcut(self.keysequence1, self.layer1)
-            self.setup_shortcut(self.keysequence2, self.layer2)
-            self.setup_shortcut(self.keysequence3, self.layer3)
-            iface.messageBar().pushMessage('shortcuts assigned', level=Qgis.Info)
-
-
+            # activate shortcuts to selected layers
+            self.activate_shortcut(self.shortcut1, self.layer1)
+            self.activate_shortcut(self.shortcut2, self.layer2)
+            self.activate_shortcut(self.shortcut3, self.layer3)
