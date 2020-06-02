@@ -71,12 +71,21 @@ class VisToggler:
         self.layer1 = None
         self.layer2 = None
         self.layer3 = None
+        self.layer4 = None
+        self.layer5 = None
+        self.layer6 = None
         self.keysequence1 = None
         self.keysequence2 = None
         self.keysequence3 = None
+        self.keysequence4 = None
+        self.keysequence5 = None
+        self.keysequence6 = None
         self.shortcut1 = None
         self.shortcut2 = None
         self.shortcut3 = None
+        self.shortcut4 = None
+        self.shortcut5 = None
+        self.shortcut6 = None
 
         # Check if plugin was started the first time in current QGIS session
         # Must be set in initGui() to survive plugin reloads
@@ -242,10 +251,16 @@ class VisToggler:
             self.keysequence1 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_1
             self.keysequence2 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_2
             self.keysequence3 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_3
+            self.keysequence4 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_4
+            self.keysequence5 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_5
+            self.keysequence6 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_6
 
             self.shortcut1 = self.setup_shortcut(self.keysequence1)
             self.shortcut2 = self.setup_shortcut(self.keysequence2)
             self.shortcut3 = self.setup_shortcut(self.keysequence3)
+            self.shortcut4 = self.setup_shortcut(self.keysequence4)
+            self.shortcut5 = self.setup_shortcut(self.keysequence5)
+            self.shortcut6 = self.setup_shortcut(self.keysequence6)
             iface.messageBar().pushMessage('shortcuts assigned', level=Qgis.Info)
 
         # disconnect shortcuts if this is NOT the first time the dialog is run:
@@ -254,6 +269,9 @@ class VisToggler:
             self.disconnect_shortcut(self.shortcut1)
             self.disconnect_shortcut(self.shortcut2)
             self.disconnect_shortcut(self.shortcut3)
+            self.disconnect_shortcut(self.shortcut4)
+            self.disconnect_shortcut(self.shortcut5)
+            self.disconnect_shortcut(self.shortcut6)
 
         # show the dialog
         self.dlg.show()
@@ -267,8 +285,14 @@ class VisToggler:
             self.layer1 = self.dlg.mMapLayerComboBox_1.currentLayer()
             self.layer2 = self.dlg.mMapLayerComboBox_2.currentLayer()
             self.layer3 = self.dlg.mMapLayerComboBox_3.currentLayer()
+            self.layer4 = self.dlg.mMapLayerComboBox_4.currentLayer()
+            self.layer5 = self.dlg.mMapLayerComboBox_5.currentLayer()
+            self.layer6 = self.dlg.mMapLayerComboBox_6.currentLayer()
 
             # activate shortcuts to selected layers
             self.connect_shortcut(self.shortcut1, self.layer1)
             self.connect_shortcut(self.shortcut2, self.layer2)
             self.connect_shortcut(self.shortcut3, self.layer3)
+            self.connect_shortcut(self.shortcut4, self.layer4)
+            self.connect_shortcut(self.shortcut5, self.layer5)
+            self.connect_shortcut(self.shortcut6, self.layer6)
