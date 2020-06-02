@@ -38,6 +38,9 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="allowEmptyLayer">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
@@ -72,6 +75,9 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="allowEmptyLayer">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="QgsMapLayerComboBox" name="mMapLayerComboBox_3">
    <property name="geometry">
@@ -81,6 +87,9 @@
      <width>221</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="allowEmptyLayer">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -155,6 +164,9 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="allowEmptyLayer">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="QgsMapLayerComboBox" name="mMapLayerComboBox_5">
    <property name="geometry">
@@ -165,6 +177,9 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="allowEmptyLayer">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="QgsMapLayerComboBox" name="mMapLayerComboBox_6">
    <property name="geometry">
@@ -174,6 +189,9 @@
      <width>221</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="allowEmptyLayer">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QLabel" name="label_6">
