@@ -248,12 +248,12 @@ class VisToggler:
 
             # setup shortcuts once
             # define key shortcuts
-            self.keysequence1 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_1
-            self.keysequence2 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_2
-            self.keysequence3 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_3
-            self.keysequence4 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_4
-            self.keysequence5 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_5
-            self.keysequence6 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_6
+            self.keysequence1 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_Q
+            self.keysequence2 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_W
+            self.keysequence3 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_E
+            self.keysequence4 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_A
+            self.keysequence5 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_S
+            self.keysequence6 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_D
 
             self.shortcut1 = self.setup_shortcut(self.keysequence1)
             self.shortcut2 = self.setup_shortcut(self.keysequence2)
