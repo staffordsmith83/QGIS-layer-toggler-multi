@@ -74,6 +74,9 @@ class VisToggler:
         self.keysequence1 = None
         self.keysequence2 = None
         self.keysequence3 = None
+        self.shortcut1 = None
+        self.shortcut2 = None
+        self.shortcut3 = None
 
         # Check if plugin was started the first time in current QGIS session
         # Must be set in initGui() to survive plugin reloads
@@ -219,11 +222,11 @@ class VisToggler:
         shortcut.setContext(Qt.ApplicationShortcut)
         return shortcut
 
-    def activate_shortcut(self, shortcut, layer):
+    def connect_shortcut(self, shortcut, layer):
         shortcut.activated.connect(lambda: self.toggle_layer(layer))
 
-    def disable_shortcut(self, shortcut):
-        shortcut.setEnabled(False)
+    def disconnect_shortcut(self, shortcut):
+        shortcut.activated.disconnect()
 
     def run(self):
         """Run method that performs all the real work"""
@@ -245,28 +248,27 @@ class VisToggler:
             self.shortcut3 = self.setup_shortcut(self.keysequence3)
             iface.messageBar().pushMessage('shortcuts assigned', level=Qgis.Info)
 
+        # disconnect shortcuts if this is NOT the first time the dialog is run:
+        else:
+            # Disconnect all shortcuts
+            self.disconnect_shortcut(self.shortcut1)
+            self.disconnect_shortcut(self.shortcut2)
+            self.disconnect_shortcut(self.shortcut3)
 
         # show the dialog
         self.dlg.show()
         # Run the dialog event loop
 
-        # # Disable all shortcuts
-        # self.disable_shortcut(self.shortcut1)
-        # self.disable_shortcut(self.shortcut1)
-        # self.disable_shortcut(self.shortcut1)
-
         result = self.dlg.exec_()
         # See if OK was pressed
         if result:
-            # Do something useful here - delete the line containing pass and
-            # substitute with your code.
 
-            # get layer from first combobox in dialog
+            # get layers from comboboxes in dialog
             self.layer1 = self.dlg.mMapLayerComboBox_1.currentLayer()
             self.layer2 = self.dlg.mMapLayerComboBox_2.currentLayer()
             self.layer3 = self.dlg.mMapLayerComboBox_3.currentLayer()
 
             # activate shortcuts to selected layers
-            self.activate_shortcut(self.shortcut1, self.layer1)
-            self.activate_shortcut(self.shortcut2, self.layer2)
-            self.activate_shortcut(self.shortcut3, self.layer3)
+            self.connect_shortcut(self.shortcut1, self.layer1)
+            self.connect_shortcut(self.shortcut2, self.layer2)
+            self.connect_shortcut(self.shortcut3, self.layer3)
