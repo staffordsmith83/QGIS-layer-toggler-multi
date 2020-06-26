@@ -248,12 +248,12 @@ class VisToggler:
 
             # setup shortcuts once
             # define key shortcuts
-            self.keysequence1 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_Q
-            self.keysequence2 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_W
-            self.keysequence3 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_E
-            self.keysequence4 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_A
-            self.keysequence5 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_S
-            self.keysequence6 = Qt.ControlModifier + Qt.AltModifier + Qt.Key_D
+            self.keysequence1 = Qt.Key_Q
+            self.keysequence2 = Qt.Key_W
+            self.keysequence3 = Qt.Key_E
+            self.keysequence4 = Qt.Key_A
+            self.keysequence5 = Qt.Key_S
+            self.keysequence6 = Qt.Key_D
 
             self.shortcut1 = self.setup_shortcut(self.keysequence1)
             self.shortcut2 = self.setup_shortcut(self.keysequence2)
@@ -264,14 +264,14 @@ class VisToggler:
             iface.messageBar().pushMessage('shortcuts assigned', level=Qgis.Info)
 
         # disconnect shortcuts if this is NOT the first time the dialog is run:
-        else:
-            # Disconnect all shortcuts
-            self.disconnect_shortcut(self.shortcut1)
-            self.disconnect_shortcut(self.shortcut2)
-            self.disconnect_shortcut(self.shortcut3)
-            self.disconnect_shortcut(self.shortcut4)
-            self.disconnect_shortcut(self.shortcut5)
-            self.disconnect_shortcut(self.shortcut6)
+        # else:
+        #     # Disconnect all shortcuts
+        #     self.disconnect_shortcut(self.shortcut1)
+        #     self.disconnect_shortcut(self.shortcut2)
+        #     self.disconnect_shortcut(self.shortcut3)
+        #     self.disconnect_shortcut(self.shortcut4)
+        #     self.disconnect_shortcut(self.shortcut5)
+        #     self.disconnect_shortcut(self.shortcut6)
 
         # show the dialog
         self.dlg.show()
@@ -280,19 +280,28 @@ class VisToggler:
         result = self.dlg.exec_()
         # See if OK was pressed
         if result:
+            # check if a layer has been selected. If so, then define it, and connect the shortcut
 
-            # get layers from comboboxes in dialog
-            self.layer1 = self.dlg.mMapLayerComboBox_1.currentLayer()
-            self.layer2 = self.dlg.mMapLayerComboBox_2.currentLayer()
-            self.layer3 = self.dlg.mMapLayerComboBox_3.currentLayer()
-            self.layer4 = self.dlg.mMapLayerComboBox_4.currentLayer()
-            self.layer5 = self.dlg.mMapLayerComboBox_5.currentLayer()
-            self.layer6 = self.dlg.mMapLayerComboBox_6.currentLayer()
-
-            # activate shortcuts to selected layers
-            self.connect_shortcut(self.shortcut1, self.layer1)
-            self.connect_shortcut(self.shortcut2, self.layer2)
-            self.connect_shortcut(self.shortcut3, self.layer3)
-            self.connect_shortcut(self.shortcut4, self.layer4)
-            self.connect_shortcut(self.shortcut5, self.layer5)
-            self.connect_shortcut(self.shortcut6, self.layer6)
+            if self.dlg.mMapLayerComboBox_1.currentLayer():
+                self.layer1 = self.dlg.mMapLayerComboBox_1.currentLayer()
+                self.connect_shortcut(self.shortcut1, self.layer1)
+            
+            if self.dlg.mMapLayerComboBox_2.currentLayer():
+                self.layer2 = self.dlg.mMapLayerComboBox_2.currentLayer()
+                self.connect_shortcut(self.shortcut2, self.layer2)
+            
+            if self.dlg.mMapLayerComboBox_3.currentLayer():
+                self.layer3 = self.dlg.mMapLayerComboBox_3.currentLayer()
+                self.connect_shortcut(self.shortcut3, self.layer3)
+            
+            if self.dlg.mMapLayerComboBox_4.currentLayer():
+                self.layer4 = self.dlg.mMapLayerComboBox_4.currentLayer()
+                self.connect_shortcut(self.shortcut4, self.layer4)
+            
+            if self.dlg.mMapLayerComboBox_5.currentLayer():
+                self.layer5 = self.dlg.mMapLayerComboBox_5.currentLayer()
+                self.connect_shortcut(self.shortcut5, self.layer5)
+            
+            if self.dlg.mMapLayerComboBox_6.currentLayer():
+                self.layer6 = self.dlg.mMapLayerComboBox_6.currentLayer()
+                self.connect_shortcut(self.shortcut6, self.layer6)
