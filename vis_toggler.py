@@ -246,6 +246,7 @@ class VisToggler:
 
             # setup shortcuts once
             # define key shortcuts
+
             self.keysequence1 = Qt.Key_Q
             self.keysequence2 = Qt.Key_W
             self.keysequence3 = Qt.Key_E
@@ -253,13 +254,24 @@ class VisToggler:
             self.keysequence5 = Qt.Key_S
             self.keysequence6 = Qt.Key_D
 
-            self.shortcut1 = self.setup_shortcut(self.keysequence1)
-            self.shortcut2 = self.setup_shortcut(self.keysequence2)
-            self.shortcut3 = self.setup_shortcut(self.keysequence3)
-            self.shortcut4 = self.setup_shortcut(self.keysequence4)
-            self.shortcut5 = self.setup_shortcut(self.keysequence5)
-            self.shortcut6 = self.setup_shortcut(self.keysequence6)
-            iface.messageBar().pushMessage('shortcuts assigned', level=Qgis.Info)
+            self.keylist = [
+                self.keysequence1,
+                self.keysequence2,
+                self.keysequence3,
+                self.keysequence4,
+                self.keysequence5,
+                self.keysequence6
+            ]
+
+            # refactor
+            self.shortcut_list = []
+            for key in self.keylist:
+                self.shortcut_list.append(self.setup_shortcut(key))
+                # but how to store return of each time the function is run and have control of the
+                # variable name it is stored in? Maybe unnecessary if everything else is done in for loops...
+                # what is the best identified for all these 1-6 things... 6 instances of a class?
+
+
 
         # show the dialog
         self.dlg.show()
@@ -267,55 +279,30 @@ class VisToggler:
         # try this: when dialog is opened, check if a combobox has a value selected.
         # If it does, disconnect its shortcut.
         # Shortcuts all reconnected when dialog closed.
-        if self.dlg.mMapLayerComboBox_1.currentLayer():
-            self.layer1 = self.dlg.mMapLayerComboBox_1.currentLayer()
-            self.disconnect_shortcut(self.shortcut1)
 
-        if self.dlg.mMapLayerComboBox_2.currentLayer():
-            self.layer2 = self.dlg.mMapLayerComboBox_2.currentLayer()
-            self.disconnect_shortcut(self.shortcut2)
+        # refactor. For loop
+        # first, make a list of the combobox objects in the dialog
+        self.comboBox_list = [self.dlg.mMapLayerComboBox_1,
+                              self.dlg.mMapLayerComboBox_2,
+                              self.dlg.mMapLayerComboBox_3,
+                              self.dlg.mMapLayerComboBox_4,
+                              self.dlg.mMapLayerComboBox_5,
+                              self.dlg.mMapLayerComboBox_6]
 
-        if self.dlg.mMapLayerComboBox_3.currentLayer():
-            self.layer3 = self.dlg.mMapLayerComboBox_3.currentLayer()
-            self.disconnect_shortcut(self.shortcut3)
+        for counter, comboBox in enumerate(self.comboBox_list):
+            if comboBox.currentLayer():
+                self.disconnect_shortcut(self.shortcut_list[counter])
 
-        if self.dlg.mMapLayerComboBox_4.currentLayer():
-            self.layer4 = self.dlg.mMapLayerComboBox_4.currentLayer()
-            self.disconnect_shortcut(self.shortcut4)
-
-        if self.dlg.mMapLayerComboBox_5.currentLayer():
-            self.layer5 = self.dlg.mMapLayerComboBox_5.currentLayer()
-            self.disconnect_shortcut(self.shortcut5)
-
-        if self.dlg.mMapLayerComboBox_6.currentLayer():
-            self.layer6 = self.dlg.mMapLayerComboBox_6.currentLayer()
-            self.disconnect_shortcut(self.shortcut6)
 
         result = self.dlg.exec_()
         # See if OK was pressed
         if result:
             # check if a layer has been selected. If so, then define it, and connect the shortcut
 
-            if self.dlg.mMapLayerComboBox_1.currentLayer():
-                self.layer1 = self.dlg.mMapLayerComboBox_1.currentLayer()
-                self.connect_shortcut(self.shortcut1, self.layer1)
+            # refactor. For loop
+            for counter, comboBox in enumerate(self.comboBox_list):
+                if comboBox.currentLayer():
+                    self.connect_shortcut(self.shortcut_list[counter], comboBox.currentLayer())
+                    message = 'Assigned shortcut for keysequence ' + self.shortcut_list[counter].key().toString()
+                    iface.messageBar().pushMessage(message, level=Qgis.Info)
 
-            if self.dlg.mMapLayerComboBox_2.currentLayer():
-                self.layer2 = self.dlg.mMapLayerComboBox_2.currentLayer()
-                self.connect_shortcut(self.shortcut2, self.layer2)
-
-            if self.dlg.mMapLayerComboBox_3.currentLayer():
-                self.layer3 = self.dlg.mMapLayerComboBox_3.currentLayer()
-                self.connect_shortcut(self.shortcut3, self.layer3)
-
-            if self.dlg.mMapLayerComboBox_4.currentLayer():
-                self.layer4 = self.dlg.mMapLayerComboBox_4.currentLayer()
-                self.connect_shortcut(self.shortcut4, self.layer4)
-
-            if self.dlg.mMapLayerComboBox_5.currentLayer():
-                self.layer5 = self.dlg.mMapLayerComboBox_5.currentLayer()
-                self.connect_shortcut(self.shortcut5, self.layer5)
-
-            if self.dlg.mMapLayerComboBox_6.currentLayer():
-                self.layer6 = self.dlg.mMapLayerComboBox_6.currentLayer()
-                self.connect_shortcut(self.shortcut6, self.layer6)
