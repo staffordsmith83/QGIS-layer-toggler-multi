@@ -68,25 +68,6 @@ class VisToggler:
         self.toolbar.setObjectName(u'Layer Visibility Toggler')
 
         # initialise these variables
-        self.layer1 = None
-        self.layer2 = None
-        self.layer3 = None
-        self.layer4 = None
-        self.layer5 = None
-        self.layer6 = None
-        self.keysequence1 = None
-        self.keysequence2 = None
-        self.keysequence3 = None
-        self.keysequence4 = None
-        self.keysequence5 = None
-        self.keysequence6 = None
-        self.shortcut1 = None
-        self.shortcut2 = None
-        self.shortcut3 = None
-        self.shortcut4 = None
-        self.shortcut5 = None
-        self.shortcut6 = None
-
         self.keylist = None
         self.shortcut_list = None
         self.comboBox_list = None
