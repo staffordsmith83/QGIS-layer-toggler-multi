@@ -106,18 +106,17 @@ class VisToggler:
         # noinspection PyTypeChecker,PyArgumentList,PyCallByClass
         return QCoreApplication.translate('VisToggler', message)
 
-
     def add_action(
-        self,
-        icon_path,
-        text,
-        callback,
-        enabled_flag=True,
-        add_to_menu=True,
-        add_to_toolbar=True,
-        status_tip=None,
-        whats_this=None,
-        parent=None):
+            self,
+            icon_path,
+            text,
+            callback,
+            enabled_flag=True,
+            add_to_menu=True,
+            add_to_toolbar=True,
+            status_tip=None,
+            whats_this=None,
+            parent=None):
         """Add a toolbar icon to the toolbar.
 
         :param icon_path: Path to the icon for this action. Can be a resource
@@ -171,7 +170,7 @@ class VisToggler:
         if add_to_toolbar:
             # Adds plugin icon to Plugins toolbar
             # self.iface.addToolBarIcon(action)
-            self.toolbar.addAction(action)  #this way should add to its own toolbar
+            self.toolbar.addAction(action)  # this way should add to its own toolbar
 
         if add_to_menu:
             self.iface.addPluginToMenu(
@@ -194,7 +193,6 @@ class VisToggler:
 
         # will be set False in run()
         self.first_start = True
-
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
@@ -263,19 +261,35 @@ class VisToggler:
             self.shortcut6 = self.setup_shortcut(self.keysequence6)
             iface.messageBar().pushMessage('shortcuts assigned', level=Qgis.Info)
 
-        # disconnect shortcuts if this is NOT the first time the dialog is run:
-        # else:
-        #     # Disconnect all shortcuts
-        #     self.disconnect_shortcut(self.shortcut1)
-        #     self.disconnect_shortcut(self.shortcut2)
-        #     self.disconnect_shortcut(self.shortcut3)
-        #     self.disconnect_shortcut(self.shortcut4)
-        #     self.disconnect_shortcut(self.shortcut5)
-        #     self.disconnect_shortcut(self.shortcut6)
-
         # show the dialog
         self.dlg.show()
         # Run the dialog event loop
+        # try this: when dialog is opened, check if a combobox has a value selected.
+        # If it does, disconnect its shortcut.
+        # Shortcuts all reconnected when dialog closed.
+        if self.dlg.mMapLayerComboBox_1.currentLayer():
+            self.layer1 = self.dlg.mMapLayerComboBox_1.currentLayer()
+            self.disconnect_shortcut(self.shortcut1)
+
+        if self.dlg.mMapLayerComboBox_2.currentLayer():
+            self.layer2 = self.dlg.mMapLayerComboBox_2.currentLayer()
+            self.disconnect_shortcut(self.shortcut2)
+
+        if self.dlg.mMapLayerComboBox_3.currentLayer():
+            self.layer3 = self.dlg.mMapLayerComboBox_3.currentLayer()
+            self.disconnect_shortcut(self.shortcut3)
+
+        if self.dlg.mMapLayerComboBox_4.currentLayer():
+            self.layer4 = self.dlg.mMapLayerComboBox_4.currentLayer()
+            self.disconnect_shortcut(self.shortcut4)
+
+        if self.dlg.mMapLayerComboBox_5.currentLayer():
+            self.layer5 = self.dlg.mMapLayerComboBox_5.currentLayer()
+            self.disconnect_shortcut(self.shortcut5)
+
+        if self.dlg.mMapLayerComboBox_6.currentLayer():
+            self.layer6 = self.dlg.mMapLayerComboBox_6.currentLayer()
+            self.disconnect_shortcut(self.shortcut6)
 
         result = self.dlg.exec_()
         # See if OK was pressed
@@ -285,23 +299,23 @@ class VisToggler:
             if self.dlg.mMapLayerComboBox_1.currentLayer():
                 self.layer1 = self.dlg.mMapLayerComboBox_1.currentLayer()
                 self.connect_shortcut(self.shortcut1, self.layer1)
-            
+
             if self.dlg.mMapLayerComboBox_2.currentLayer():
                 self.layer2 = self.dlg.mMapLayerComboBox_2.currentLayer()
                 self.connect_shortcut(self.shortcut2, self.layer2)
-            
+
             if self.dlg.mMapLayerComboBox_3.currentLayer():
                 self.layer3 = self.dlg.mMapLayerComboBox_3.currentLayer()
                 self.connect_shortcut(self.shortcut3, self.layer3)
-            
+
             if self.dlg.mMapLayerComboBox_4.currentLayer():
                 self.layer4 = self.dlg.mMapLayerComboBox_4.currentLayer()
                 self.connect_shortcut(self.shortcut4, self.layer4)
-            
+
             if self.dlg.mMapLayerComboBox_5.currentLayer():
                 self.layer5 = self.dlg.mMapLayerComboBox_5.currentLayer()
                 self.connect_shortcut(self.shortcut5, self.layer5)
-            
+
             if self.dlg.mMapLayerComboBox_6.currentLayer():
                 self.layer6 = self.dlg.mMapLayerComboBox_6.currentLayer()
                 self.connect_shortcut(self.shortcut6, self.layer6)

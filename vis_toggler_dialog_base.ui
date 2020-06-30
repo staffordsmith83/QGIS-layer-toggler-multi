@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>446</width>
-    <height>438</height>
+    <width>430</width>
+    <height>598</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QDialogButtonBox" name="button_box">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>400</y>
+     <x>40</x>
+     <y>550</y>
      <width>341</width>
      <height>32</height>
     </rect>
@@ -37,6 +37,9 @@
      <width>221</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="currentIndex">
+    <number>-1</number>
    </property>
    <property name="allowEmptyLayer">
     <bool>true</bool>
@@ -75,6 +78,9 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="currentIndex">
+    <number>-1</number>
+   </property>
    <property name="allowEmptyLayer">
     <bool>true</bool>
    </property>
@@ -87,6 +93,9 @@
      <width>221</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="currentIndex">
+    <number>-1</number>
    </property>
    <property name="allowEmptyLayer">
     <bool>true</bool>
@@ -102,7 +111,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>CTRL + ALT + Q</string>
+    <string>q</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">
@@ -115,7 +124,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>CTRL + ALT + W</string>
+    <string>w</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_4">
@@ -128,7 +137,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>CTRL + ALT + E</string>
+    <string>e</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_5">
@@ -164,6 +173,9 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="currentIndex">
+    <number>-1</number>
+   </property>
    <property name="allowEmptyLayer">
     <bool>true</bool>
    </property>
@@ -177,6 +189,9 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="currentIndex">
+    <number>-1</number>
+   </property>
    <property name="allowEmptyLayer">
     <bool>true</bool>
    </property>
@@ -189,6 +204,9 @@
      <width>221</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="currentIndex">
+    <number>-1</number>
    </property>
    <property name="allowEmptyLayer">
     <bool>true</bool>
@@ -204,7 +222,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>CTRL + ALT + A</string>
+    <string>a</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_7">
@@ -217,7 +235,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>CTRL + ALT + S</string>
+    <string>s</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_8">
@@ -230,7 +248,29 @@
     </rect>
    </property>
    <property name="text">
-    <string>CTRL + ALT + D</string>
+    <string>d</string>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="textBrowser">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>370</y>
+     <width>401</width>
+     <height>161</height>
+    </rect>
+   </property>
+   <property name="html">
+    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:7.875pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Assign up to 6 layers to the shortcut keys above.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;When reopening the plugin dialog, all assigned shortcut will be reset.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;They will be reassigned when clicking OK.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;So you can resassign or deactivate your shortcuts by reopening the plugin dialog.&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Happy Toggling!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
  </widget>
