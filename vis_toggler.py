@@ -205,20 +205,26 @@ class VisToggler:
     # Try to write function that alternates state of layer vis
     def toggle_layer(self, layer):
 
-        vis = QgsProject.instance() \
-            .layerTreeRoot() \
-            .findLayer(layer.id()) \
-            .isVisible()
-        if vis == True:
-            QgsProject.instance() \
+        # throwing error in next block if layer has been deleted
+        try:
+            vis = QgsProject.instance() \
                 .layerTreeRoot() \
                 .findLayer(layer.id()) \
-                .setItemVisibilityChecked(False)
-        if vis == False:
-            QgsProject.instance() \
-                .layerTreeRoot() \
-                .findLayer(layer.id()) \
-                .setItemVisibilityChecked(True)
+                .isVisible()
+            if vis == True:
+                QgsProject.instance() \
+                    .layerTreeRoot() \
+                    .findLayer(layer.id()) \
+                    .setItemVisibilityChecked(False)
+            if vis == False:
+                QgsProject.instance() \
+                    .layerTreeRoot() \
+                    .findLayer(layer.id()) \
+                    .setItemVisibilityChecked(True)
+
+        except:
+            iface.messageBar().pushMessage("Error toggling the layer. Has the assigned layer been removed?",
+                                           level=Qgis.Info)
 
     # Shortcut Key Section
     def setup_shortcut(self, keysequence):
@@ -304,5 +310,5 @@ class VisToggler:
                 if comboBox.currentLayer():
                     self.connect_shortcut(self.shortcut_list[counter], comboBox.currentLayer())
                     message = 'Assigned shortcut for keysequence ' + self.shortcut_list[counter].key().toString()
-                    iface.messageBar().pushMessage(message, level=Qgis.Info)
+                    iface.messageBar().pushMessage(message, level=Qgis.Success, duration=1)
 
