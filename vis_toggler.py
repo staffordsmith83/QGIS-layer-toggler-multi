@@ -239,6 +239,25 @@ class VisToggler:
                                   self.dlg.mMapLayerComboBox_5,
                                   self.dlg.mMapLayerComboBox_6]
 
+            # make all the shortcuts now
+
+            self.keylist1 = ['Q', 'W', 'E', 'A', 'S', 'D']
+            self.keylist2 = ['Ctrl+Alt+Q', 'Ctrl+Alt+W', 'Ctrl+Alt+E', 'Ctrl+Alt+A', 'Ctrl+Alt+S', 'Ctrl+Alt+D']
+            self.keylist3 = [Qt.Key_1, Qt.Key_2, Qt.Key_3, Qt.Key_4, Qt.Key_5, Qt.Key_6]
+
+            self.shortcut_list1 = []
+            for key in self.keylist1:
+                self.shortcut_list1.append(self.setup_shortcut(key))
+
+            self.shortcut_list2 = []
+            for key in self.keylist2:
+                self.shortcut_list2.append(self.setup_shortcut(key))
+
+            self.shortcut_list3 = []
+            for key in self.keylist3:
+                self.shortcut_list3.append(self.setup_shortcut(key))
+
+
         # show the dialog
         self.dlg.show()
         # Run the dialog event loop
@@ -258,28 +277,15 @@ class VisToggler:
         if result:
 
             # next, define the key sequences based on these shortcuts
-            self.keylist = []
+
             if self.dlg.defaultButton.isChecked():
-                self.keylist = ['Q', 'W', 'E', 'A', 'S', 'D']
+                self.shortcut_list = self.shortcut_list1
 
             if self.dlg.modifierButton_1.isChecked():
-                modifier = 'Ctrl+Alt+'
-                basic_key_list = ['Q', 'W', 'E', 'A', 'S', 'D']
-                for key in basic_key_list:
-                    keysequence = modifier + key
-                    self.keylist.append(keysequence)
+                self.shortcut_list = self.shortcut_list2
 
             if self.dlg.modifierButton_2.isChecked():
-                modifier = Qt.KeypadModifier
-                basic_key_list = [Qt.Key_1, Qt.Key_2, Qt.Key_3, Qt.Key_4, Qt.Key_5, Qt.Key_6]
-                for key in basic_key_list:
-                    # keysequence = modifier + key
-                    keysequence = key   # numpad modifier removed, was not working in Linux. All numbers active.
-                    self.keylist.append(keysequence)
-
-            self.shortcut_list = []
-            for key in self.keylist:
-                self.shortcut_list.append(self.setup_shortcut(key))
+                self.shortcut_list = self.shortcut_list3
 
             # check if a layer has been selected. If so, then define it, and connect the shortcut
             for counter, comboBox in enumerate(self.comboBox_list):
