@@ -273,7 +273,8 @@ class VisToggler:
                 modifier = Qt.KeypadModifier
                 basic_key_list = [Qt.Key_1, Qt.Key_2, Qt.Key_3, Qt.Key_4, Qt.Key_5, Qt.Key_6]
                 for key in basic_key_list:
-                    keysequence = modifier + key
+                    # keysequence = modifier + key
+                    keysequence = key   # numpad modifier removed, was not working in Linux. All numbers active.
                     self.keylist.append(keysequence)
 
             self.shortcut_list = []
