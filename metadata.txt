@@ -1,4 +1,4 @@
-﻿# This file contains metadata for your plugin.
+# This file contains metadata for your plugin.
 
 # This file should be included when you package your plugin.# Mandatory items:
 
@@ -6,14 +6,14 @@
 name=Layer Visibility Toggler
 qgisMinimumVersion=3.0
 description=Toggle visibility of layers with keystrokes
-version=3.1
+version=2.0
 author=Stafford Smith
 email=staffordsmith83@gmail.com
 
-about=The plugin allows you to switch the visibility status of 6 layers with keyboard shortcuts. Layers can be selected with a dialog when loading the plugin. Shortcut is customisable. Useful to turn on and off different reference layers, can greatly speed up some workflows.
+about=The plugin allows you to switch the visibility status of 3 layers separately. Layers can be selected with a dialog when loading the plugin. The visibility of these three layers can then be toggled with a different key combination for each. Useful to turn on and off different reference layers, can greatly speed up some workflows.
 
 tracker=http://bugs
-repository=http://repo
+repository=https://github.com/staffordsmith83/QGIS-layer-toggler
 # End of mandatory metadata
 
 # Recommended items:
